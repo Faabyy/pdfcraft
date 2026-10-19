@@ -2939,6 +2939,9 @@ fn reading_follows_forms_as_far_as_the_renderer_and_says_where_it_stops() {
         page_with_forms("/D1 Do", &forms)
     };
     assert_eq!(tail(&chain(13)), (true, false));
+    // The renderer's limit, written out so the test does not move with the constant.
+    assert_eq!(tail(&chain(50)), (true, false));
+    assert_eq!(tail(&chain(51)), (false, true));
     let deepest = chain(text::MAX_FORM_DEPTH);
     assert_eq!(tail(&deepest), (true, false));
     assert_eq!(images::reading_images(&deepest, 0).unwrap().len(), 1);
